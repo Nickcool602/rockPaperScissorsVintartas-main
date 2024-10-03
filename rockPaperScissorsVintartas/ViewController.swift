@@ -84,6 +84,7 @@ class ViewController: UIViewController {
         compInfoLabel.isHidden = false
         playerInfoLabel.isHidden = false
         gameplayInfoLabel.isHidden = false
+        winnerOutlet.text = "First to reach ten wins, wins the round"
     }
     
     override func viewDidLoad() {
