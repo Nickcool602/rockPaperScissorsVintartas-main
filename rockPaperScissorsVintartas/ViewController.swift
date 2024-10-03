@@ -19,6 +19,16 @@ class ViewController: UIViewController {
     
     var wins = 0
     
+    var points = 0
+    
+    var compPoints = 0
+    
+    var round = 1
+    
+    @IBOutlet weak var computerPoints: UILabel!
+    
+    @IBOutlet weak var playerPoints: UILabel!
+    
     @IBOutlet weak var winnerOutlet: UILabel!
     
     @IBOutlet weak var computerImage: UIImageView!
@@ -30,6 +40,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var tieLabel: UILabel!
     
     @IBOutlet weak var winLabel: UILabel!
+    
+    @IBOutlet weak var compInfoLabel: UILabel!
+    
+    @IBOutlet weak var playerInfoLabel: UILabel!
+    
+    @IBOutlet weak var roundLabel: UILabel!
+    
+    @IBOutlet weak var gameplayInfoLabel: UILabel!
     
     func rock() {
         playerImage.image = UIImage(named: "Rock")
@@ -54,6 +72,18 @@ class ViewController: UIViewController {
         wins = 0
         losses = 0
         ties = 0
+        winLabel.text = "Wins: \(wins)"
+        tieLabel.text = "Ties: \(ties)"
+        lossLabel.text = "Losses: \(losses)"
+        points = 0
+        compPoints = 0
+        playerPoints.text = String(points)
+        computerPoints.text = String(compPoints)
+        computerImage.image = UIImage(named: "Box")
+        playerImage.image = UIImage(named: "Box")
+        compInfoLabel.isHidden = false
+        playerInfoLabel.isHidden = false
+        gameplayInfoLabel.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -67,6 +97,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func shootButton(_ sender: Any) {
+        
+        compInfoLabel.isHidden = true
+        
+        playerInfoLabel.isHidden = true
+        
+        gameplayInfoLabel.isHidden = true
         
         computerChoice = Int.random(in: 0...2)
         
@@ -128,6 +164,32 @@ class ViewController: UIViewController {
         winLabel.text = "Wins: \(wins)"
         tieLabel.text = "Ties: \(ties)"
         lossLabel.text = "Losses: \(losses)"
+        
+        if wins >= 10 {
+            points = points + 1
+            playerPoints.text = "Player Points: \(points)"
+            winnerOutlet.text = "Round won!"
+            wins = 0
+            ties = 0
+            losses = 0
+            winLabel.text = "Wins: \(wins)"
+            tieLabel.text = "Ties: \(ties)"
+            lossLabel.text = "Losses: \(losses)"
+            round = round + 1
+            roundLabel.text = "Round: \(round)"
+        }
+        if losses >= 10 {
+            compPoints = compPoints + 1
+            computerPoints.text = "Computer Points: \(compPoints)"
+            winnerOutlet.text = "Round lost..."
+            wins = 0
+            ties = 0
+            losses = 0
+            winLabel.text = "Wins: \(wins)"
+            tieLabel.text = "Ties: \(ties)"
+            lossLabel.text = "Losses: \(losses)"
+            roundLabel.text = "Round: \(round)"
+        }
         
     }
     
